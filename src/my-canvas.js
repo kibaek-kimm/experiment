@@ -1,11 +1,11 @@
 import Dot from "./class/Dot";
-import { getAxisLength } from "./utils";
+import { getAxisLength, getPythagoras } from "./utils";
 
 let canvas;
 let ctx;
 const windowWidth = window.innerWidth;
 const windowHeight = window.innerHeight;
-const GAP = 30;
+const GAP = 100;
 const DOT_SIZE = 1;
 const GAP_XAXIS_FOR_CENTER = windowWidth % (GAP + DOT_SIZE);
 const GAP_YAXIS_FOR_CENTER = windowHeight % (GAP + DOT_SIZE);
@@ -39,6 +39,27 @@ function draw() {
     ctx.closePath();
   });
 }
+
+function handleMouseMove(e) {
+  const RANGE_RADIUS = 50;
+  // 특정 범위 내에 점 가져오기
+  // 방향값(deltaX, deltaY) 가져오기
+  dots.forEach(dot => {
+    const distance = getPythagoras(Math.abs(dot.x - e.clientX), Math.abs(dot.y - e.clientY));
+    const power = Math.abs(RANGE_RADIUS - distance);
+    // const deltaX = 
+    if (distance < RANGE_RADIUS) {
+      console.log(power);
+    }
+  });
+
+  // 
+  // 가까울수록 커지는 수식 만들기
+  // 점에 할당
+  // draw
+}
+
+window.addEventListener('mousemove', handleMouseMove);
 
 
 setupCanvas();
